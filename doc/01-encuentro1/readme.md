@@ -142,16 +142,6 @@ Un sitio web típico está compuesto por:
 - **Recursos multimedia**: Imágenes, videos, audio
 - **Otros archivos**: Fuentes, íconos, documentos
 
-  
-### Estructura básica de un sitio web
-
-Un sitio web típico está compuesto por:
-
-- **Páginas HTML**: Definen la estructura y contenido
-- **Archivos CSS**: Controlan la presentación visual (colores, fuentes, diseño)
-- **Archivos JavaScript**: Añaden interactividad y funcionalidad dinámica
-- **Recursos multimedia**: Imágenes, videos, audio
-- **Otros archivos**: Fuentes, íconos, documentos
 
 ### Herramientas de desarrollo
 
