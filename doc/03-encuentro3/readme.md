@@ -444,6 +444,54 @@ El modelo de caja es un concepto fundamental en CSS que describe cómo se calcul
 }
 ```
 
+#### Ejemplo con Grid
+```
+<div class="wrapper">
+  <div class="one">One</div>
+  <div class="two">Two</div>
+  <div class="three">Three</div>
+  <div class="four">Four</div>
+  <div class="five">Five</div>
+  <div class="six">Six</div>
+</div>
+```
+
+```
+.wrapper {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 10px;
+  grid-auto-rows: minmax(100px, auto);
+}
+.one {
+  grid-column: 1 / 3;
+  grid-row: 1;
+}
+.two {
+  grid-column: 2 / 4;
+  grid-row: 1 / 3;
+}
+.three {
+  grid-column: 1;
+  grid-row: 2 / 5;
+}
+.four {
+  grid-column: 3;
+  grid-row: 3;
+}
+.five {
+  grid-column: 2;
+  grid-row: 4;
+}
+.six {
+  grid-column: 3;
+  grid-row: 4;
+}
+```
+
+<img width="763" height="468" alt="Screenshot 2025-07-15 at 3 26 55 PM" src="https://github.com/user-attachments/assets/e5c8b668-a1b6-4a18-892e-d5b1f1c38e8e" />
+
+
 #### Ejemplo de Layout con Grid
 
 ```css
