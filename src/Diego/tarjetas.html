@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Demo - Tarjeta Interactiva</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            width: 100%;
+        }
+
+        .tarjeta-interactiva {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            transform: translateY(0);
+            transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+            cursor: pointer;
+            overflow: hidden;
+            position: relative;
+            min-height: 200px;
+        }
+
+        .tarjeta-interactiva::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.6s;
+        }
+
+        .tarjeta-interactiva:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+        }
+
+        .tarjeta-interactiva:hover::before {
+            left: 100%;
+        }
+
+        .tarjeta-interactiva h3 {
+            margin: 0 0 15px 0;
+            font-size: 24px;
+            transform: translateX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .tarjeta-interactiva:hover h3 {
+            transform: translateX(10px);
+        }
+
+        .tarjeta-interactiva p {
+            font-size: 16px;
+            line-height: 1.5;
+            opacity: 0.9;
+            margin-bottom: 20px;
+        }
+
+        .tarjeta-interactiva .precio {
+            font-size: 28px;
+            font-weight: bold;
+            color: #ffd700;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+
+        /* Variantes de colores */
+        .tarjeta-verde {
+            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+        }
+
+        .tarjeta-naranja {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        }
+
+        .tarjeta-azul {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        }
+
+        .titulo-principal {
+            text-align: center;
+            color: white;
+            font-size: 2.5rem;
+            margin-bottom: 40px;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        }
+
+        .badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background-color: rgba(255,255,255,0.2);
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+            text-transform: uppercase;
+            backdrop-filter: blur(10px);
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .titulo-principal {
+                font-size: 2rem;
+            }
+            
+            .tarjeta-interactiva {
+                padding: 25px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="titulo-principal" style="grid-column: 1 / -1;">Tarjetas Interactivas CSS</h1>
+        
+        <div class="tarjeta-interactiva">
+            <div class="badge">Premium</div>
+            <h3>Diseño Web Profesional</h3>
+            <p>Creamos sitios web modernos y responsivos que impresionan a tus clientes y mejoran tu presencia online.</p>
+            <div class="precio">$299</div>
+        </div>
+
+        <div class="tarjeta-interactiva tarjeta-verde">
+            <div class="badge">Popular</div>
+            <h3>Desarrollo de Apps</h3>
+            <p>Aplicaciones móviles nativas y web apps que conectan con tu audiencia en cualquier dispositivo.</p>
+            <div class="precio">$499</div>
+        </div>
+
+        <div class="tarjeta-interactiva tarjeta-naranja">
+            <div class="badge">Nuevo</div>
+            <h3>Marketing Digital</h3>
+            <p>Estrategias de marketing digital personalizadas para hacer crecer tu negocio en el mundo online.</p>
+            <div class="precio">$199</div>
+        </div>
+
+        <div class="tarjeta-interactiva tarjeta-azul">
+            <div class="badge">Oferta</div>
+            <h3>Consultoría Tech</h3>
+            <p>Asesoramiento tecnológico especializado para optimizar tus procesos y mejorar la eficiencia.</p>
+            <div class="precio">$149</div>
+        </div>
+
+        <div class="tarjeta-interactiva">
+            <div class="badge">Pro</div>
+            <h3>E-commerce Completo</h3>
+            <p>Tienda online completa con sistema de pagos, gestión de inventario y panel de administración.</p>
+            <div class="precio">$799</div>
+        </div>
+
+        <div class="tarjeta-interactiva tarjeta-verde">
+            <div class="badge">Básico</div>
+            <h3>Mantenimiento Web</h3>
+            <p>Servicio de mantenimiento y actualización continua para mantener tu sitio web siempre actualizado.</p>
+            <div class="precio">$99/mes</div>
+        </div>
+    </div>
+</body>
+</html>
