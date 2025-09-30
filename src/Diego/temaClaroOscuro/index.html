@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset='utf-8'>
+  <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+  <title>Page Title</title>
+  <meta name='viewport' content='width=device-width, initial-scale=1'>
+  <style>
+    .tema-oscuro {
+        background-color: #333;
+        color: white;
+    }
+
+    .tema-oscuro .contenido {
+        background-color: #555;
+        padding: 20px;
+        border-radius: 8px;
+    }
+  </style>
+</head>
+<body>
+    <button id="cambiarTema">🌙 Cambiar tema</button>
+    <div class="contenido">
+      <h1>Mi página web</h1>
+      <p>Contenido de ejemplo</p>
+      <a href="contacto.html">Contacto</a>
+      <button onclick="irDiscord()">Ir a Discord</button>
+    </div>
+</body>
+<script>
+  const botonTema = document.getElementById('cambiarTema');
+  // const parametros = new URLSearchParams(window.location.search);
+  // let temaOscuro = parametros.has('tema') && parametros.get('tema') === 'oscuro';
+  let temaOscuro = localStorage.getItem('tema') === 'true';
+  botonTema.textContent = temaOscuro ? '☀️ Cambiar tema' : '🌙 Cambiar tema';
+  if (temaOscuro) document.body.classList.add('tema-oscuro');
+
+  botonTema.addEventListener('click', () => {
+    document.body.classList.toggle('tema-oscuro');
+    temaOscuro = !temaOscuro;
+    localStorage.setItem('tema', temaOscuro);
+    
+    botonTema.textContent = temaOscuro ? '☀️ Cambiar tema' : '🌙 Cambiar tema';
+  });
+
+  function irDiscord() {
+    window.location.href = 'https://discord.com';
+  }
+</script>
+</html>

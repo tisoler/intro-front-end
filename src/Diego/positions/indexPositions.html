@@ -1,0 +1,76 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Page Title</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <style>
+        .static {
+            position: static;
+            background: #e0e0e0;
+            padding: 10px;
+            margin-bottom: 10px;
+            left: 10px;
+        }
+        .relative {
+            position: relative;
+            left: 30px;
+            background: #b3c6ff;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+        .absolute-container {
+            position: relative;
+            height: 280px;
+            background: #f9f9f9;
+            margin-bottom: 10px;
+        }
+        .absolute {
+            position: absolute;
+            top: -20px;
+            right: 20px;
+            background: #ffb3b3;
+            padding: 10px;
+        }
+        .fixed {
+            position: fixed;
+            bottom: 10px;
+            right: 10px;
+            background: #b3ffb3;
+            padding: 10px;
+            z-index: 100;
+        }
+        .sticky {
+            position: sticky;
+            top: 0;
+            background: #ffd699;
+            padding: 10px;
+            margin-bottom: 10px;
+            z-index: 50;
+        }
+    </style>
+</head>
+<body style="height: 200vh">
+
+    <div class="relative">Relative Position (left: 30px)</div>
+    <div class="sticky">Sticky Position (sticks to top when scrolling)</div>
+    <div class="relative">Relative Position (left: 30px)</div>
+    <div class="static">Static Position 1</div>
+    <div class="static">Static Position 2</div>
+    <div style="border: 1px black solid" class="absolute-container">
+        <div class="relative">Relative Position (left: 30px) 1</div>
+        <div class="relative">Relative Position (left: 30px) 2</div>
+        <div class="absolute">Absolute Position (inside relative container)</div>
+        <div class="relative">Relative Position (left: 30px) 3</div>
+    </div>
+    <div class="fixed">Fixed Position (top-right corner)</div>
+
+    <div>
+        <div style="right: 50%; background-color: salmon" class="fixed">
+            Fixed Position (top-center)
+        </div>
+    </div>
+</body>
+</html>

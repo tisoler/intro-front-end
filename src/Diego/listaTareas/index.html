@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset='utf-8'>
+  <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+  <title>Page Title</title>
+  <meta name='viewport' content='width=device-width, initial-scale=1'>
+  <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
+  <script src='main.js'></script>
+</head>
+<body>
+  <input type="text" id="nuevaTarea" placeholder="Nueva tarea">
+  <button id="agregar">Agregar</button>
+  <ul id="listaTareas"></ul>
+
+  <script>
+    const input = document.getElementById('nuevaTarea');
+    const botonAgregar = document.getElementById('agregar');
+    const lista = document.getElementById('listaTareas');
+
+    function agregarTarea() {
+        const textoTarea = input.value.trim();
+        
+        if (textoTarea === '') {
+            alert('Por favor ingresa una tarea');
+            return;
+        }
+        
+        // Crear elementos
+        const li = document.createElement('li');
+        const botonEliminar = document.createElement('button');
+        
+        li.textContent = textoTarea;
+        botonEliminar.textContent = 'Eliminar';
+        
+        // Agregar evento de eliminar
+        botonEliminar.addEventListener('click', () => {
+            lista.removeChild(li);
+        });
+        
+        // Agregar elementos al DOM
+        li.appendChild(botonEliminar);
+        lista.appendChild(li);
+        
+        // Limpiar input
+        input.value = '';
+    }
+
+    botonAgregar.addEventListener('click', agregarTarea);
+
+    // También agregar con Enter
+    input.addEventListener('keydown', (evento) => {
+        if (evento.key === 'Enter') {
+            agregarTarea();
+        }
+    });
+  </script>
+</body>
+</html>

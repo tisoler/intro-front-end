@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset='utf-8'>
+  <title>Lista de tareas</title>
+  <link rel="stylesheet" href="panel.css" />
+</head>
+<body>
+  <input type="text" id="nuevaTarea" placeholder="Nueva tarea">
+  <button id="agregar">Agregar</button>
+  <button id="btnCancelar" style="display: none;" onclick="cancelarEdicion()">Cancelar</button>
+  <ul id="listaTareas"></ul>
+
+  <script>
+    const input = document.getElementById('nuevaTarea');
+    const botonAgregar = document.getElementById('agregar');
+    const botonCancelar = document.getElementById('btnCancelar');
+    const lista = document.getElementById('listaTareas');
+    
+    let tareaEnEdicion = null; // Guardamos el <li> que estamos editando
+    
+    function finalizarEdicion () {
+      if (!tareaEnEdicion) return;
+      tareaEnEdicion.querySelector('span').classList.remove('tareaEnEdicion');
+      tareaEnEdicion = null;
+      botonAgregar.textContent = 'Agregar';
+      input.value = '';
+    }
+
+    function cancelarEdicion() {
+      finalizarEdicion();
+    }
+
+    function agregarTarea() {
+      const textoTarea = input.value.trim();
+      
+      if (textoTarea === '') {
+        alert('Por favor ingresa una tarea');
+        return;
+      }
+
+      if (tareaEnEdicion) {
+        // Si estamos editando
+        tareaEnEdicion.querySelector('span').textContent = textoTarea;
+        finalizarEdicion();
+      } else {
+        // Crear elementos
+        const li = document.createElement('li');
+        const span = document.createElement('span');
+        span.textContent = textoTarea;
+
+        const botonEditar = document.createElement('button');
+        botonEditar.textContent = 'Editar';
+        function editarTarea () {
+          finalizarEdicion();
+          input.value = span.textContent;
+          tareaEnEdicion = li;
+          botonAgregar.textContent = 'Guardar';
+
+          // Cambiar estilos individuales
+          span.classList.add('tareaEnEdicion');
+
+          // Hacemos visible el botón cancelar
+          botonCancelar.style.display = 'inline-block';
+        }
+        botonEditar.addEventListener('click', editarTarea);
+        
+        const botonEliminar = document.createElement('button');
+        botonEliminar.textContent = 'Eliminar';
+        function eliminarTarea () {
+          botonEditar.removeEventListener('click', editarTarea);
+          botonEliminar.removeEventListener('click', eliminarTarea);
+          lista.removeChild(li);
+        }
+        botonEliminar.addEventListener('click', eliminarTarea);
+
+        // Armar li
+        li.appendChild(span);
+        li.appendChild(botonEditar);
+        li.appendChild(botonEliminar);
+        lista.appendChild(li);
+      }
+
+      // Limpiar input
+      input.value = '';
+    }
+
+    botonAgregar.addEventListener('click', agregarTarea);
+
+    // También agregar con Enter
+    input.addEventListener('keydown', (evento) => {
+      if (evento.key === 'Enter') {
+        agregarTarea();
+      }
+    });
+  </script>
+</body>
+</html>

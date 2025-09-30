@@ -15,10 +15,25 @@
             font-family: 'Arial', sans-serif;
             background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
             min-height: 100vh;
+            align-items: center;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .sticky-header {
+            position: sticky;
+            top: 0;
+            left: 0;
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            text-align: center;
+            z-index: 1000;
+            width: 100vw;
+            height: 50px;
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 20px;
+            gap: 10px;
         }
 
         .container {
@@ -27,6 +42,7 @@
             gap: 30px;
             max-width: 1200px;
             width: 100%;
+            margin-top: 60px;
         }
 
         .tarjeta-interactiva {
@@ -110,7 +126,7 @@
         }
 
         .badge {
-            position: absolute;
+            position: fixed;
             top: 15px;
             right: 15px;
             background-color: rgba(255,255,255,0.2);
@@ -135,18 +151,41 @@
             .tarjeta-interactiva {
                 padding: 25px;
             }
+
+            .precio {
+                position: absolute;
+                top: 15px;
+                left: 15px;
+            }
         }
     </style>
+    <script type="text/javascript">
+        document.addEventListener("DOMContentLoaded", function() {
+            console.log("Hola Mundo");
+            let apellidoNombre = "Posebon Guillermo";
+            console.log(apellidoNombre);
+            apellidoNombre = "Diego Díaz Barroso";
+            console.log(apellidoNombre);
+            const edad = 60;
+            console.log(edad);
+
+            const h2Usuario = document.getElementById("nombreUsuario");
+            h2Usuario.innerText = "Bienvenido " + apellidoNombre + " !";
+
+        });
+    </script>
 </head>
 <body>
+    <header class="sticky-header">
+        <h2 id="nombreUsuario"></h2>
+    </header>
     <div class="container">
-        <h1 class="titulo-principal" style="grid-column: 1 / -1;">Tarjetas Interactivas CSS</h1>
         
         <div class="tarjeta-interactiva">
             <div class="badge">Premium</div>
             <h3>Diseño Web Profesional</h3>
             <p>Creamos sitios web modernos y responsivos que impresionan a tus clientes y mejoran tu presencia online.</p>
-            <div class="precio">$299</div>
+            <div id="precio" class="precio">$299</div>
         </div>
 
         <div class="tarjeta-interactiva tarjeta-verde">
@@ -184,5 +223,6 @@
             <div class="precio">$99/mes</div>
         </div>
     </div>
+    <button onclick="aumentar()">Aumentar</button>
 </body>
 </html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Page Title</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <script>
+        function manejarEnviarMensaje() {
+            const textoMensaje = document.getElementById('inputMensaje')?.value;
+            if (!textoMensaje) return;
+            const contenedorMensajes = document.getElementById('contenedorMensajes');
+            const nuevoMensaje = document.createElement('p');
+            nuevoMensaje.textContent = textoMensaje;
+            contenedorMensajes.appendChild(nuevoMensaje);
+        }
+
+        function eliminarUltimoMensaje() {
+            const contenedorMensajes = document.getElementById('contenedorMensajes');
+            contenedorMensajes.removeChild(contenedorMensajes.children[contenedorMensajes.children?.length - 1])
+        }
+
+        function resetearConversacion () {
+            const contenedorMensajes = document.getElementById('contenedorMensajes');
+            contenedorMensajes.innerHTML = '<strong>Texto en negrita</strong>';
+        }
+    </script>
+</head>
+<body>
+    <div id="contenedorMensajes" style="display: flex; flex-direction: column; gap: 4px; height: 70vh; width: 300px; border: solid 2px red; margin: 20px auto;"></div>
+    <div style="margin: 0 auto; width: fit-content">
+        <input type="text" id="inputMensaje" placeholder="Escribe un mensaje">
+        <button onclick="manejarEnviarMensaje()">Enviar</button>
+        <button onclick="eliminarUltimoMensaje()">Borrar último</button>
+        <button onclick="resetearConversacion()">Reset</button>
+    </div>
+</body>
+</html>

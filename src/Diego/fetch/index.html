@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Page Title</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+</head>
+<body>
+    <div id="contenedor" style="height: 100vh; width: 100vw; display: flex; flex-direction: column; justify-content: center; align-items: center;">
+        <h1 id="nombre"></h1>
+        <img id="imagen" width="300" height="300"/>
+        <h2>Habilidades</h2>
+        <ul id="habilidades"></ul>
+        <button onclick="cambiarPersonaje()">Cambiar personaje</button>
+    </div>
+    <script>
+        const personajes = ['Pikachu', 'Ditto', 'Charmander', 'Raichu', 'Squirtle', 'Bulbasaur'];
+        let indicePersonajeActual = 0;
+        const campoNombre = document.getElementById('nombre');
+        const imagenPersonaje = document.getElementById('imagen');
+        const listaHabilidades = document.getElementById('habilidades');
+
+        async function cargarDatos(personaje = 'Pikachu') {
+            try {
+                const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${personaje.toLowerCase()}`);
+                const data = await response.json();
+                campoNombre.textContent = data?.name || 'Sin nombre';
+
+                const urlImagen = data?.sprites?.other?.dream_world?.front_default || '';
+                imagenPersonaje.setAttribute('src', urlImagen);
+                imagenPersonaje.setAttribute('alt', 'Image de ' + data?.name || 'Sin nombre');
+
+                const items = data.abilities?.map(habilidad => {
+                    const habilidadItem = document.createElement('li');
+                    habilidadItem.textContent = habilidad?.ability?.name;
+                    return habilidadItem;
+                });
+                listaHabilidades.innerHTML = '';
+                listaHabilidades.append(...items);
+
+                contenedor.append(nombre, imagen, tituloHabilidades, listHabilidades);
+            } catch (error) {
+                console.error('Error:', error);
+            }
+        }
+
+        cargarDatos();        
+
+        function cambiarPersonaje() {
+            indicePersonajeActual = indicePersonajeActual >= personajes.length - 1 ? 0 : indicePersonajeActual + 1;
+            cargarDatos(personajes[indicePersonajeActual]);
+        }
+    </script>
+</body>
+</html>

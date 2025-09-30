@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Page Title</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+</head>
+<body>
+    <form id="contacto" style="display: flex; flex-direction: column; gap: 5px; width: 400px; margin: 0 auto;">
+        <input type="text" name="nombre" oninput="limpiarMensjaes()" placeholder="Nombre" >
+        <input type="text" name="email" oninput="limpiarMensjaes()" placeholder="Email" >
+        <input type="password" name="password" oninput="limpiarMensjaes()" placeholder="Pass" >
+        <button type="submit">Enviar</button>
+        <span id="mensajes" style="font-weight: 600; color: red"></span>
+    </form>
+</body>
+<script>
+    const formulario = document.getElementById('contacto');
+    const expRegPass = /^(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?])(?=.{8,}).*$/;
+
+    function validarEmail(email) {
+        const patron = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return patron.test(email);
+    }
+
+    function validarFormulario(nombre, email, password) {
+        let mensajesError = [];
+        if (nombre.length < 2) {
+            mensajesError.push('El nombre debe tener al menos 2 caracteres.');
+        }
+        
+        const mailEsValido = validarEmail(email);
+        if (!mailEsValido) {
+            mensajesError.push('Email inválido.');
+        }
+
+        const passwordValido = expRegPass.test(password);
+        if (!passwordValido) {
+            mensajesError.push('Password inválido.');
+        }
+        
+        return mensajesError;
+    }
+
+    formulario.addEventListener('submit', function(evento) {
+        evento.preventDefault(); // Evitar envío automático
+
+        const datosFormulario = new FormData(formulario);
+
+        const datos = {};
+        const nombre = datosFormulario.get('nombre') || '';
+        const email = datosFormulario.get('email') || '';
+        const password = datosFormulario.get('password') || '';
+
+        const validaciones = validarFormulario(nombre, email, password);
+
+        if (validaciones.length === 0) {
+            console.log('Llamar API')
+        } else {
+            const spanMensajes = document.getElementById('mensajes');
+            spanMensajes.textContent = validaciones.join(' ').trimEnd();
+            console.log('No llama a la API')
+        }
+    });
+
+    function limpiarMensjaes() {
+        const spanMensajes = document.getElementById('mensajes');
+        spanMensajes.textContent = '';
+    }
+</script>
+</html>
